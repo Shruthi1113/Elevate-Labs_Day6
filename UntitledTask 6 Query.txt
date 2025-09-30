@@ -1,0 +1,98 @@
+
+SELECT 
+    strftime('%Y', Date) AS year,
+    strftime('%m', Date) AS month,
+    SUM(Weekly_Sales) AS total_revenue,
+    COUNT(DISTINCT Store) AS sales_volume
+FROM Walmart_Sales_Cleaned4
+WHERE Date BETWEEN '2010-01-01' AND '2012-12-31'   -- limit specific time period
+GROUP BY year, month
+ORDER BY year, month;
+
+
+SELECT 
+    strftime('%Y', Date) AS year,
+    strftime('%m', Date) AS month,
+    SUM(Weekly_Sales) AS total_revenue,
+    COUNT(DISTINCT Store) AS sales_volume
+FROM Walmart_Sales_Cleaned4
+GROUP BY year, month
+ORDER BY year, month;
+
+
+SELECT 
+    Store,
+    SUM(Weekly_Sales) AS total_sales,
+    AVG(Weekly_Sales) AS avg_sales,
+    COUNT(*) AS weeks_count
+FROM Walmart_Sales_Cleaned4
+GROUP BY Store
+ORDER BY total_sales DESC;
+
+
+
+SELECT 
+    Holiday_Flag,
+    SUM(Weekly_Sales) AS total_sales,
+    AVG(Weekly_Sales) AS avg_sales,
+    COUNT(*) AS weeks_count
+FROM Walmart_Sales_Cleaned4
+GROUP BY Holiday_Flag
+ORDER BY Holiday_Flag;
+
+
+
+
+SELECT 
+    Store,
+    Holiday_Flag,
+    SUM(Weekly_Sales) AS total_sales,
+    AVG(Weekly_Sales) AS avg_sales,
+    COUNT(*) AS weeks_count
+FROM Walmart_Sales_Cleaned4
+GROUP BY Store, Holiday_Flag
+ORDER BY Store, Holiday_Flag;
+
+
+SELECT 
+    Store,
+    year,
+    AVG(Weekly_Sales) AS avg_weekly_sales
+FROM Walmart_Sales_Cleaned4
+GROUP BY Store, year
+ORDER BY Store, year;
+
+
+
+SELECT 
+    CAST(Temperature AS INTEGER) AS Temp_Range,
+    AVG(Weekly_Sales) AS avg_sales
+FROM Walmart_Sales_Cleaned4
+GROUP BY Temp_Range
+ORDER BY Temp_Range;
+
+
+
+SELECT 
+    Store,
+    SUM(Weekly_Sales) AS total_holiday_sales
+FROM Walmart_Sales_Cleaned4
+WHERE Holiday_Flag = 1
+GROUP BY Store
+ORDER BY total_holiday_sales DESC
+LIMIT 5;
+
+
+
+SELECT 
+    year,
+    month,
+    AVG(Temperature) AS avg_temp,
+    SUM(Weekly_Sales) AS total_sales
+FROM Walmart_Sales_Cleaned4
+GROUP BY year, month
+ORDER BY year, month;
+
+
+
+
